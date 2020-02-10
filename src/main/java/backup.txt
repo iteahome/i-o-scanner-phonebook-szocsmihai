@@ -1,0 +1,113 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * By using Scanner, find the phone number of a specific name.
+ * PhoneBook is persisted in the "phonebook.txt".
+ * Example:
+ * Input: Marius
+ * Output: 0313221222
+ */
+
+public class PhoneBookScanner {
+    public static void main(String[] args) throws FileNotFoundException {
+
+//      Reading the contacts from the phonebook file via Scanner:
+        File inputFile = new File("src/main/resources/phonebook.txt");
+        Scanner inputFileScanner = new Scanner(inputFile);
+
+//      Storing the file's contents in a String:
+        StringBuilder contactListBuilder = new StringBuilder();
+            while (inputFileScanner.hasNext()) {
+                contactListBuilder.append(inputFileScanner.next() + " ");
+            }
+        String rawContacts = contactListBuilder.toString();
+        System.out.println("Contacts String: " + rawContacts);
+
+////      Storing individual contacts in an ArrayList:
+//        List<String> contacts = new ArrayList<>();
+//        while(inputFileScanner.hasNextLine()){
+//                contacts.add(inputFileScanner.nextLine()); /*ALSO ADDS EMPTY LINES AS CONTACTS... HOW DO I AVOID THAT?*/
+//        }
+////      Checking ArrayList values:
+//        for (int i = 0; i < contacts.size(); i++) {
+//            System.out.println("Contact at index " + i + " is: " + contacts.get(i));
+//        }
+
+//      Using Scanner to get user input:
+        Scanner keyboardScanner = new Scanner(System.in);
+        String searchedName = keyboardScanner.nextLine();
+
+//      Separating name and number via regex:
+        Pattern namePattern = Pattern.compile(searchedName);
+        Matcher nameMatcher = namePattern.matcher(rawContacts);
+        while(nameMatcher.find()) {
+            for (int i = 0; i == nameMatcher.groupCount(); i++) {
+                System.out.println(nameMatcher.group(i));
+            }
+        }
+//            while (nameMatcher.find()) {
+//                for (int i = 0; i < nameMatcher.groupCount(); i++) {
+//                    System.out.println("Name found at index " + i + " is: " + nameMatcher.group(i));
+//                }
+//            }
+
+//            Pattern contactNumberPattern = Pattern.compile("\\d+");
+//            Matcher contactNumberMatcher = contactNumberPattern.matcher("src/main/resources/phonebook.txt");
+//
+//            while (nameMatcher.find()) {
+//
+//            }
+
+
+
+//      Idea #3: Storing the file's contacts to a HashMap:
+//        HashMap<String, String> contactDetails = new HashMap<String, String>();
+//        while()
+//        contactDetails.put();
+
+
+//
+//
+//        contacts.put(nameMatcher.group(0), contactNumberMatcher.group(0));
+
+
+
+
+//        for(String contact : contacts) {
+//            System.out.println(contact.toString());
+//        }
+
+//      Reading user input:
+//        System.out.println("Enter a contact name:");
+//        Scanner keyboardScanner = new Scanner(System.in);
+//        String userInput = keyboardScanner.next();
+
+//      Matching a phone number to a name using regex:
+
+//        try {
+//            for (int i = 0; i < contacts.size(); i++) {
+//                Pattern pattern = Pattern.compile(userInput);
+//                Matcher matcher = pattern.matcher(contacts.toString());
+//                boolean found = false;
+//                if (pattern.matches(userInput)) {
+//                    System.out.println(contact.toString());
+//                }
+//            }
+//        } catch(Exception e){}
+
+//        try {
+//            Pattern pattern = Pattern.compile(userInput);
+//            Matcher matcher = pattern.matcher(contacts.toString());
+//            for (String contact : contacts) {
+//                if (pattern.matches(userInput)) {
+//                    System.out.println(contact.toString());
+//                }
+//            }
+//        } catch(Exception e){}
+
+    }
+}
